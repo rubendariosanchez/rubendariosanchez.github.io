@@ -1,82 +1,81 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/Home.css';
-import Topbar from '../components/Topbar.jsx';
-import Sidebar from '../components/Sidebar.jsx';
-import { withStyles } from "@material-ui/core";
+import Particles from 'react-particles-js';
+import Animate from 'react-smooth';
+import particles from '../const/particle.js';
+import Container from '../components/Container.jsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-// Definimos los estilos base
-const styles = theme => ({});
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+});
 
 /**
- * Clase para mostrar la ventana de inicia
+ * Permite mostrar la interfaz inicial del aplicativo
  */
-class Home extends Component {
+function Home(){
 
-  /**
-   * Creamos el constructor
-   */
-  constructor(props) {
-    super(props);
-    console.log(this);
-    // definimos el estado inicial
-    this.state = {
-      openSidebar: false
-    };
+  // obtenemos el titulo a mostrar
+  var titleApp = 'Portafolio1';
 
-    // Establecemos que el this sigue siendo el de la clase
-    this.handleSidebarOpen = this.handleSidebarOpen.bind(this);
-    this.handleSidebarClose = this.handleSidebarClose.bind(this);
-  }
-
-  /**
-   * Permite abrir el sidebar
-   */
-  handleSidebarOpen(){
-    this.setState({ openSidebar: true }, () =>
-      console.log("Main.js state is true.")
-    );
-  };
-
-   /**
-   * Permite cerrar el sidebar
-   */
-   handleSidebarClose(){
-    this.setState({ openSidebar: false });
-  };
+  // Se obtiene las clases configuradas
+  const classes = useStyles();
 
   /**
    * Permite renderizar la interfaz 
    */ 
-  render() {
-    // obtenemos el titulo a mostrar
-    var titleApp = 'Portafolio';
-
-    // Retornamos la interfaz
-    return (
-      <>
-      <Topbar onSidebarOpen={this.handleSidebarOpen} title={titleApp}></Topbar>
-      <Sidebar
-        open={this.state.openSidebar}
-        onOpen={this.handleSidebarOpen}
-        onClose={this.handleSidebarClose}
-      >
-        <h1>HOlallalal</h1>
-      </Sidebar>
-      
-      </>
-    );
-  }
+  // Retornamos la interfaz
+  return (
+    <>
+    <Animate to="1" from="0" attributeName="opacity">
+      <Particles
+      params={particles}
+      className="particle"
+      />
+    </Animate>
+    <Container titleApp={titleApp}>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="Contemplative Reptile"
+            height="140"
+            image="/static/images/cards/contemplative-reptile.jpg"
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              Lizard
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+              across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary">
+            Share
+          </Button>
+          <Button size="small" color="primary">
+            Learn More
+          </Button>
+        </CardActions>
+      </Card>
+    </Container>      
+    </>
+  );
   
 }
 
 // se exporta como un módulo de la página de inicio
-//export default connect(mapStateToProps, null) (Home);
-export default withStyles(styles)(Home);
-/*
-<Animate to="1" from="0" attributeName="opacity">
-            <Particles
-            params={particles}
-            className="particle"
-            />
-             </Animate>
-*/
+export default Home;

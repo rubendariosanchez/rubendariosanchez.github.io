@@ -1,16 +1,3 @@
-.App-header {
-    background-color:#090909;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-.App-main {
-    min-height: 95vh; 
-  }
-
-.App-footer {
-    min-height: 5vh; 
-  }  
 
 .particle{
     position:fixed !important;
@@ -18,5 +5,5 @@
     top:0;
     width:100%;
     height:100%;
-    background-color:#090909;
+    z-index: -1;
 }
