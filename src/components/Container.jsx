@@ -15,11 +15,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import Link from '@material-ui/core/Link';
+import LinkMUI from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
-import { red } from '@material-ui/core/colors';
+import { red, grey } from '@material-ui/core/colors';
 import CardHeader from '@material-ui/core/CardHeader';
 import InfoIcon from '@material-ui/icons/Info';
+import {Link} from 'react-router-dom';
 import {AppsScriptIcon, EducationIcon, ExperienceIcon} from '../const/icons.js';
 
 // definimos el maximo de
@@ -32,18 +33,21 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: 'flex',
+    "&$selected": {
+      backgroundColor: "red"
+    }
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-    },
+    }
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-    },
+    }
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -55,6 +59,8 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: grey[50],
+    boxShadow: "1px 1px 11px #5858586b"
   },
   content: {
     flexGrow: 1,
@@ -71,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 function Container(props) {
 
   // Obtenemos las propiedades que vamos a usar
-  const { window, children, titleApp } = props;
+  const { window, children, titleApp, itemSelected } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -85,7 +91,7 @@ function Container(props) {
 
   // Variable donde se configura el menú de la izquierda
   const drawer = (
-    <div>
+    <div className={"mui__menu-content"}>
       <div className={classes.toolbar1} />
       <CardHeader
         avatar={
@@ -95,23 +101,32 @@ function Container(props) {
         title="Rubén Darío Sánchez"
         subheader="Web Developer"
       />
-      <List>
+      <List className={"mui__menu-content-item"}>        
         <Divider />
-        <ListItem button key={"Acerca de mí"}>
+        <Link className={"lnk__menu-item"} to="/about">
+          <ListItem selected={itemSelected === "about" ? true : false} button key={"Acerca de mí"}>
+          
             <ListItemIcon><InfoIcon /></ListItemIcon>
             <ListItemText primary={"Acerca de mí"} />
-        </ListItem>
+          
+          </ListItem>
+        </Link>
         <Divider />
-        <ListItem button key={"Educación"}>
-            <ListItemIcon><EducationIcon /></ListItemIcon>
-            <ListItemText primary={"Educación"} />
-        </ListItem>
-        <ListItem button key={"Experiencia"}>
+        <Link className={"lnk__menu-item"} to="/education">
+          <ListItem selected={itemSelected === "education" ? true : false} button key={"Educación"}>
+              <ListItemIcon><EducationIcon /></ListItemIcon>
+              <ListItemText primary={"Educación"} />
+          </ListItem>
+        </Link>
+        <Divider />
+        <Link className={"lnk__menu-item"} to="/experience">
+          <ListItem selected={itemSelected === "experience" ? true : false} button key={"Experiencia"}>
             <ListItemIcon><ExperienceIcon /></ListItemIcon>
             <ListItemText primary={"Experiencia"} />
-        </ListItem>
+          </ListItem>
+        </Link>
         <Divider />
-        <ListItem button key={"Google Apps Script"}>
+        <ListItem selected={itemSelected === "gas" ? true : false} button key={"Google Apps Script"}>
             <ListItemIcon><AppsScriptIcon /></ListItemIcon>
             <ListItemText primary={"Google Apps Script"} />
         </ListItem>
@@ -144,7 +159,7 @@ function Container(props) {
           </Typography>
           <div className={classes.grow} />
           <div>              
-            <Link 
+            <LinkMUI 
               color="inherit"
               title="Abrir linkedin"
               href="https://www.linkedin.com/in/rub%C3%A9n-dar%C3%ADo-s%C3%A1nchez-ram%C3%ADrez-6a3a606b/"
@@ -152,8 +167,8 @@ function Container(props) {
               <IconButton aria-label="Linkedin" color="inherit" >
                 <LinkedInIcon />
               </IconButton>
-            </Link>
-            <Link 
+            </LinkMUI>
+            <LinkMUI 
               color="inherit"
               title="Abrir github"
               href="https://github.com/rubendariosanchez/"
@@ -161,7 +176,7 @@ function Container(props) {
               <IconButton aria-label="Github" color="inherit">
                 <GitHubIcon />
               </IconButton>
-            </Link>
+            </LinkMUI>
           </div>
         </Toolbar>
       </AppBar>
