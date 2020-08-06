@@ -70,7 +70,7 @@ const renderExperienceList = function (experienceList = [], classes){
 function Experience(){
  
   // obtenemos el titulo a mostrar
-  var titleApp = 'Educación';
+  var titleApp = 'Mi experiencia';
 
   // Se obtiene las clases configuradas
   const classes = useStyles();

@@ -70,7 +70,7 @@ const renderEducationList = function (educationList = [], classes){
 function Education(){
  
   // obtenemos el titulo a mostrar
-  var titleApp = 'Educación';
+  var titleApp = 'Mis estudios';
 
   // Se obtiene las clases configuradas
   const classes = useStyles();
