@@ -126,10 +126,12 @@ function Container(props) {
           </ListItem>
         </Link>
         <Divider />
-        <ListItem selected={itemSelected === "gas" ? true : false} button key={"Google Apps Script"}>
-            <ListItemIcon><AppsScriptIcon /></ListItemIcon>
-            <ListItemText primary={"Google Apps Script"} />
-        </ListItem>
+        <a className={"lnk__menu-item"} href={"https://developers.google.com/apps-script/reference/"} target="_blank">
+          <ListItem selected={itemSelected === "gas" ? true : false} button key={"Google Apps Script"}>
+              <ListItemIcon><AppsScriptIcon /></ListItemIcon>
+              <ListItemText primary={"Google Apps Script"} />
+          </ListItem>
+        </a>
         <Divider />
       </List>
       
